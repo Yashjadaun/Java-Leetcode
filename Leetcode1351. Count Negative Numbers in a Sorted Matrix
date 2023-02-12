@@ -1,0 +1,20 @@
+class Solution {
+    public int countNegatives(int[][] grid) {
+        int count=0;
+        int m=grid.length; //No of rows in 2d matrix.
+         int n=grid[0].length;//No of collums in 2d matrix.
+        for(int i=0; i<m;i++){
+          int low=0;
+         int high=grid[0].length-1;
+           while(low<=high){
+                 int mid=low+(high-low)/2;         
+                 if(grid[i][mid]<0){
+                    count=count+(high-mid)+1;
+                    high=mid-1;
+                 }
+                 else low=mid+1;
+                }  
+        }
+   return count;
+    }
+}
