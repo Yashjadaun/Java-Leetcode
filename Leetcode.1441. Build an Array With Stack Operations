@@ -1,0 +1,23 @@
+class Solution {
+    public List<String> buildArray(int[] target, int n) {
+        int m=1;
+        ArrayList<String> a = new ArrayList<>(); 
+       
+  
+        for(int i=0;i<target.length;i++){
+ 
+           while(target[i]!=m){
+              a.add("Push");
+                a.add("Pop");
+                m++;
+           }
+           
+                if(target[i]==m){
+                a.add("Push");
+                 m++;
+            }
+            
+        }
+          return a;
+    }
+}
