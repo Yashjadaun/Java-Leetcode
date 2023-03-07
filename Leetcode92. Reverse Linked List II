@@ -1,0 +1,39 @@
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        int i=1;
+        ListNode curr=head;
+        ListNode prev=null;
+        ListNode subprev=null;
+
+        if(left==right) return head;
+// reaching the left node of the linked list.
+            while(i<left){
+                prev=curr;
+               curr=curr.next;
+                i++;
+            }
+            
+             ListNode dummy=curr;
+// revrse the linked list to the right index.
+  while( i<=right){
+     ListNode newnode= curr.next;
+     curr.next=subprev;
+     subprev=curr;
+     curr=newnode;
+     i++;
+  }
+//   conexting nodes 
+//   If reversing start from firstnode
+  if(dummy==head){
+    dummy.next=curr;
+    head=subprev;
+  }
+//   If reversing start from othernode no Headnode or firstnode.
+  else{
+        prev.next=subprev;
+       dummy.next=curr;
+  }
+
+return head;
+    }
+}
