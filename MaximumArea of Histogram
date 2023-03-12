@@ -1,0 +1,70 @@
+import java.util.*;
+public class Main
+{
+    
+    public static int [] rightindex(){
+        	int arr[]={2,1,5,6,2,3};
+        	Stack <Integer> s= new Stack<>();
+        	int a[]=new int[arr.length];
+        	for(int i=arr.length-1;i>=0;i--){
+        	    
+        	    while(!s.empty()&&arr[s.peek()]>=arr[i]){
+        	        s.pop();
+        	    }
+        	    
+        	    if(s.empty()){
+        	       s.push(i);
+        	        a[i]=a.length;
+        	        
+        	    }
+        	        
+        	    else{
+        	        int a1=s.peek();
+        	         s.push(i);
+        	         a[i]=a1;
+        	    }
+        	}
+        	return a;
+    }
+    
+     public static int [] leftindex(){
+        	int arr[]={2,1,5,6,2,3};
+        	Stack <Integer> s= new Stack<>();
+        	int a[]=new int[arr.length];
+        	for(int i=0;i<arr.length;i++){
+        	    
+        	    while(!s.empty()&&arr[s.peek()]>=arr[i]){
+        	        s.pop();
+        	    }
+        	    
+        	    if(s.empty()){
+        	       s.push(i);
+        	        a[i]=-1;
+        	        
+        	    }
+        	        
+        	    else{
+        	        int a1=s.peek();
+        	         s.push(i);
+        	         a[i]=a1;
+        	    }
+        	}
+        	return a;
+    }
+	public static void main(String[] args) {
+		int arr[]={2,1,5,6,2,3};
+		int []right=rightindex();
+		int []left=leftindex();
+	   int maxarea=0;
+	   for(int i=0;i<arr.length;i++){
+	       int height=arr[i];
+	       
+	       int width=right[i]-left[i]-1;
+	       int area=height*width;
+	       if(area>maxarea){
+	           maxarea=area;
+	       }
+	   }
+		System.out.println(maxarea);
+	}
+}
