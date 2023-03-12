@@ -2,8 +2,8 @@ import java.util.*;
 public class Main
 {
     
-    public static int [] rightindex(){
-        	int arr[]={2,1,5,6,2,3};
+    public static int [] rightindex(int arr[]){
+        	
         	Stack <Integer> s= new Stack<>();
         	int a[]=new int[arr.length];
         	for(int i=arr.length-1;i>=0;i--){
@@ -27,8 +27,8 @@ public class Main
         	return a;
     }
     
-     public static int [] leftindex(){
-        	int arr[]={2,1,5,6,2,3};
+     public static int [] leftindex(int arr[]){
+        	
         	Stack <Integer> s= new Stack<>();
         	int a[]=new int[arr.length];
         	for(int i=0;i<arr.length;i++){
@@ -53,8 +53,8 @@ public class Main
     }
 	public static void main(String[] args) {
 		int arr[]={2,1,5,6,2,3};
-		int []right=rightindex();
-		int []left=leftindex();
+		int []right=rightindex(arr);
+		int []left=leftindex(arr);
 	   int maxarea=0;
 	   for(int i=0;i<arr.length;i++){
 	       int height=arr[i];
