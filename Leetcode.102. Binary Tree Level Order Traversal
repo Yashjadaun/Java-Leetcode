@@ -13,7 +13,7 @@ class Solution {
             if(root1==null){
                 if(!q1.isEmpty())q1.add(null);
                 List<Integer> l3=new ArrayList<>(l1);
-                l2.add(l1);
+                l2.add(l3);
                  l1.clear();               
             }
             else{
