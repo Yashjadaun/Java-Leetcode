@@ -1,0 +1,30 @@
+
+class Solution {
+    public int kadanes(int[] a){
+        int n = a.length;
+        int sum = a[0], answer = a[0];
+        for(int i=1; i<a.length; i++){
+            sum += a[i];
+            if(sum < a[i]) sum = a[i];
+            answer = Math.max(answer, sum);
+        }
+        return answer;
+    }
+    // Finding the minium sum  of the Subarray from the array.
+    // and minus by the total sum of array 
+    public int maxSubarraySumCircular(int[] A) {
+        if(A.length == 0) return 0;
+        int x = kadanes(A);
+        int y = 0;
+
+        for(int i=0; i<A.length;i++){
+            y += A[i];
+            A[i] *= -1;
+        }
+        int z = kadanes(A);
+// y=total sum of array.
+// minim sum of array.
+        if(y+z == 0) return x;
+        return  Math.max(x, y+z);
+    }
+}
