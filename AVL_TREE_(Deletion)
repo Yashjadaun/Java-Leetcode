@@ -1,0 +1,120 @@
+
+class Sol
+{
+    public static int height (Node root){
+        if(root==null) return 0;
+        
+          int leftHeight = height(root.left);
+          int rightHeight = height(root.right);
+          
+          return Math.max(leftHeight,rightHeight)+1;
+    }
+    
+    
+   public static Node Findinorder(Node root){
+            while(root.left!=null){
+                root=root.left;
+            }
+            return root;
+     }
+     
+    
+    
+ public static  int bf(Node root){
+    if(root==null)
+        return 0;
+    int leftHeight = height(root.left);
+    int rightHeight = height(root.right);
+    return rightHeight-leftHeight;
+}
+
+
+  public static Node  leftRotation(Node root1){
+    //set the child of Avl tree.
+    /*
+     *             root                                        b
+     *           /      \                                    /   \
+     *          a        b                =>               root   w
+     *       /   \      /  \                               /  \
+     *      x    y     c    w                             a   c
+     *                                                    /\
+     *                                                   x  y
+       */                                                   
+    Node b=root1.right;
+    Node c=b.left;
+
+    b.left=root1;
+    root1.right=c;
+   
+    root1.height=Math.max(height(root1.left),height(root1.right))+1;
+    b.height=Math.max(height(b.left),height(b.right))+1;
+
+    return b;
+ }
+ 
+ public static Node  rightRotation(Node root1){
+    Node b=root1.left;
+    Node c=b.right;
+
+    b.right=root1;
+    root1.left=c;
+   
+    root1.height=Math.max(height(root1.left),height(root1.right))+1;
+    b.height=Math.max(height(b.left),height(b.right))+1;
+
+    return b;
+ }
+ 
+ 
+public static Node deleteNode(Node root, int data){
+        // code here.
+    
+        if(root==null) return root;
+        
+    if(root.data<data){
+        root.right = deleteNode(root.right,data);
+    }
+    
+    else if(root.data>data){
+        root.left = deleteNode(root.left,data);
+    }
+    
+    else{
+           if(root.left==null&&root.right==null)return null;
+       
+          
+        if(root.left==null)return root.right;
+       if(root.right==null)return root.left;
+       
+          
+          Node newnode=Findinorder(root.right);
+          root.data=newnode.data;
+          root.right=deleteNode( root.right,newnode.data);
+         
+    }
+       if(root==null)
+            return root;
+            
+        int bff = bf(root);
+        
+        // right right case for left rotation
+          if(bff>1 && bf(root.right)>=0)
+                return leftRotation(root);
+          // left left case for right rotation  
+          
+          else if(bff<-1 && bf(root.left)<=0)
+                return rightRotation(root);
+              // Right left case for rl rotation 
+          else if(bff>1 && bf(root.right)<0){
+                root.right = rightRotation(root.right);
+                return leftRotation(root);
+          }
+        //   left right case  for lr rotation
+          else if(bff<-1 && bf(root.left)>0){
+                root.left = leftRotation(root.left);
+                return rightRotation(root);
+          }
+    return root;
+    
+    }
+}
